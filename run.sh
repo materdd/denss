@@ -1,0 +1,1 @@
+python bin/denss.py -f 6lyz.out --plot_on
