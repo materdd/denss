@@ -12,8 +12,9 @@ try:
 except ImportError:
     matplotlib_found = False
 
-def parse_arguments(parser,gnomdmax=None):
 
+### 引数の設定
+def parse_arguments(parser,gnomdmax=None):
     parser.add_argument("--version", action="version",version="%(prog)s v{version}".format(version=__version__))
     parser.add_argument("-f", "--file", type=str, help="SAXS data file for input (either .dat or .out)")
     parser.add_argument("-u", "--units", default="a", type=str, help="Angular units (\"a\" [1/angstrom] or \"nm\" [1/nanometer]; default=\"a\")")

@@ -24,7 +24,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
+### シャープ５つは村上記載コメント
+### パッケージインストール
 from saxstats._version import __version__
 import saxstats.saxstats as saxs
 import saxstats.denssopts as dopts
@@ -41,11 +42,12 @@ try:
 except ImportError:
     matplotlib_found = False
 
+### 引数の設定（python denss.py --option_a value_a --option_b value_bというように引数を渡す設定）
 #have to run parser twice, first just to get filename for loadProfile
 #then have to run it after deciding what the correct dmax should be
 #so that the voxel size, box size, nsamples, etc are set correctly
 initparser = argparse.ArgumentParser(description=" DENSS: DENsity from Solution Scattering.\n A tool for calculating an electron density map from solution scattering data", formatter_class=argparse.RawTextHelpFormatter)
-initargs = dopts.parse_arguments(initparser, gnomdmax=None)
+initargs = dopts.parse_arguments(initparser, gnomdmax=None)　### doptsは引数設定関数
 
 q, I, sigq, dmax, isout = saxs.loadProfile(initargs.file, units=initargs.units)
 
@@ -70,6 +72,7 @@ parser = argparse.ArgumentParser(description="DENSS: DENsity from Solution Scatt
 args = dopts.parse_arguments(parser, gnomdmax=dmax)
 
 if __name__ == "__main__":
+    ### log設定
     my_logger = logging.getLogger()
     my_logger.setLevel(logging.DEBUG)
 
@@ -93,6 +96,7 @@ if __name__ == "__main__":
     my_logger.info('Output prefix: %s', args.output)
     my_logger.info('Mode: %s', args.mode)
 
+    ### denssの本体（計算部分）
     qdata, Idata, sigqdata, qbinsc, Imean, chis, rg, supportV, rho, side = saxs.denss(
         q=q,I=I,sigq=sigq,
         dmax=args.dmax,
@@ -141,6 +145,7 @@ if __name__ == "__main__":
     # np.savetxt(args.output+'_map.fit',fit,delimiter=' ',fmt='%.5e', header='q(data),I(data),error(data),q(density),I(density)')
     # np.savetxt(args.output+'_stats_by_step.dat',np.vstack((chis, rg, supportV)).T,delimiter=" ",fmt="%.5e",header='Chi2 Rg SupportVolume')
 
+    ### matplotlibを用いた描画
     if args.plot and matplotlib_found:
         f = plt.figure(figsize=[6,6])
         gs = gridspec.GridSpec(2, 1, height_ratios=[3,1])
