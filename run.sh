@@ -1,1 +1,1 @@
-python bin/denss.py -f 6lyz.out --plot_on
+python bin/denss.py -f 6lyz.out --plot_on --steps 1000
