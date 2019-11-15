@@ -131,13 +131,13 @@ venv.bak/
 *.c
 
 #random file extensions
-*.dat
-*.mrc
-*.xplor
-*.png
-*.out
-*.fit
-*.log
-*.pdb
+#*.dat
+#*.mrc
+#*.xplor
+#*.png
+#*.out
+#*.fit
+#*.log
+#*.pdb
 *.zip
 
